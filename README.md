@@ -2,13 +2,51 @@
 
 **Greetings! Now that I'm finally wrapping up my Linux essentials studies, I'll be moving over to Docker for a while. Realistically, I'll be studying Python in January but I'll be doing Docker here and there to get the hang of it. It's interests me more than Python but less than Terraform. I think I need to start here first though. So once again, I'll be publicly documenting my notes. I hear Cloud and DevOps jobs rely heavily on Docker so we need to learn this too! I won't be taking any certifications for this as of yet.**
 
+## 12.25.2024
+
+**Today's Topics**
+
+* Docker Quick Start
+
+
+
 ## 12.24.2024
 
 **Today's Topics**
 
-* Essential Container Concepts (Chapter 2 - X)
+* Essential Container Concepts 
 
+Chapter 7 - Apache Mesos
+
+I'm not learning this lol. I don't see the point. I've never even heard of it. 
+
+_______________
+Chapter 6 - Kubernetes
+
+We, the administrator, talks to the Kubernetes master that talks tothe worker node. You can have multiple worker nodes. 
+
+Pod - a group of containers. It can be one container or multiple containers. The container or containers live in a pod. 
+
+Pods can have a shared set of resources if they want like a namespace or network. You can do this per pod instead of per container. 
+
+Worker nodes used to be referred to as minion nodes. Just a random note. 
+
+Kubelet - the agent for managing the node and communication with master. Remember, Docker is a container runtime. So is LXC and other options. 
+
+Kube-proxy - it runs the network proxy on each node. Just think networking and API calls. 
+
+Kubernetes also has its own namepsaces. Don't get too involved with this. We'll go back over this when we get to Kubernetes (if we even do this). 
+
+_______________
 Chapter 5 - Docker Swarm
+
+The Docker version of Kubernetes. You can do all of this from the Docker CLI so the learning curb is probably smaller. 
+
+We went over a few commands to deploy multiple containters at once using `docker service`. This is new to me so I'm not necessarily taking notes. Plus, I planned on using Kubernetes instead of Docker Swarm. Cool stuff though. 
+
+Docker image - A lightweight, standalone, read-only template for creating containers. Think of it as the blueprint to create your container. 
+
+You run different Linux services/servers like NGINX and HTTPD on containers because it separates the service from the hosting system. You can run it all in a container similar to a microservice. So, the (Docker) imgae is all the information needed to spin up that specific (Docker) container. The container (which could be a custom container, NXGINX, HTTPD, Python, whatever) runs in an isolated environment separate from the host system. You don't want any of this running on the host system if you're interested in containers. Obviously you can but this defeats the purpose of containers. 
 
 _______________
 Chapter 4 - Docker
@@ -29,10 +67,10 @@ Use `docker image pull <image name>:<image version>` to grab an image from the D
 
 
 Lab 1 - Installing Docker
-
+We're going to do exactly as the title of the lab. Lets install the necessary package dependencies and then download the Docker repo that we want (make sure it's in /etc/yum.repos.d). Then we'll install it and run the hello-world container for proof. 
 
 Lab 2 - Working with Docker Images
-
+We just used `docker image pull` for a few different services. Very straightforward lab. 
 
 _______________
 Chapter 3 - LXC / LXD
