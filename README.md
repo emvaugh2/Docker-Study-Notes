@@ -2,6 +2,93 @@
 
 **Greetings! Now that I'm finally wrapping up my Linux essentials studies, I'll be moving over to Docker for a while. Realistically, I'll be studying Python in January but I'll be doing Docker here and there to get the hang of it. It's interests me more than Python but less than Terraform. I think I need to start here first though. So once again, I'll be publicly documenting my notes. I hear Cloud and DevOps jobs rely heavily on Docker so we need to learn this too! I won't be taking any certifications for this as of yet.**
 
+## 12.24.2024
 
+**Today's Topics**
+
+* Essential Container Concepts (Chapter 2 - X)
+
+Chapter 5 - Docker Swarm
+
+_______________
+Chapter 4 - Docker
+
+Docker was open-sourced in 2013. DotCloud created Docker as a Python script. It eventually become a lot of microservices so they had to regroup. 
+
+Docker is an application that was written to make it easier to run other applications in containers. Docker daemon > REST API > Client Docker CLI. It's not a replacement for LXC. It's just trying to bring in those powerful functionalities. Think of applications more than machines for Docker. You can also track versions of containers as well. 
+
+When we install Docker, we install the Docker daemon (docker.d). The REST API sends communication to the docker.d via the Docker CLI. We don't usually write our own APIs for Docker. 
+
+"The instructor installed yum-utils, lvm2, and device-mapper-persistent-data before starting the Docker installation because these packages are prerequisites or utilities that enhance the Docker setup process. Here's a breakdown of why each package is used:"
+
+Duly noted. The instructor also used `yum-config-manager -add-repo <Docker URL>`. I still need to get more familiar with the different parts of the yum command but it seems like it's just pulling the Docker install repo down but not actually installing it yet. Yeah I see it's in /etc/yum.repo.d/
+
+Now they're going to install it. I feel like this is a way to install the Docker version that you want specifically. You don't necessarily have to do it this way. You can eventually just use `systemctl` to enable Docker. You can test if Docker is working by running the container `docker run hello-world` which just runs the container hello-world. The container just prints hello world. 
+
+Use `docker image pull <image name>:<image version>` to grab an image from the Docker Hub. You can use `docker history <image name>` to see some info on your image. Use `docker images` to see all of your images. 
+
+
+Lab 1 - Installing Docker
+
+
+Lab 2 - Working with Docker Images
+
+
+_______________
+Chapter 3 - LXC / LXD
+
+LXD - Linux Container Daemon
+
+`exec` stands for execute. So execute the following command. Also, you may need to specify `/bin/bash/` because some containers don't automatically assume you want Bash as your shell environment. 
+
+Think of LXC as lightweight VM replacement (more general-purpose), not so much a container. It's somewhere in the middle. Podman and Docker are more in common than LXC and Docker. 
+
+Lab - Installing LXC/LXD
+Pretty straightforward although I need to get used to using Ubuntu and not RHEL or CentOS. We installed `lxd` using `snap` and then grabbed an image using `lxc launch`. Afterwards, we ran the container using `lxc exec <container name> -- /bin/ash` which I've never used the ash shell environment. It still worked similar to Bash. 
+
+_______________
+Chapter 2 - Components
+
+Lab - Creating a Chrooted Environment
+We copied a bunch of files into a self-made `/home/elba` directory. I guess this would be the place for the `chroot` environment. I'm not sure why we copied those specific files. I'll have to ask Chat GPT. But eventually, we did `chroot /home/elba /bin/bash` which I guess the second part creates the environment with a Bash shell. Then we were in our new root environment. So that was pretty cool. Very isolated. 
+
+
+Lets talk about cgroups (control groups). Think of cgroups as resource managers for containers. 
+
+blkio (block io) - lets you limit and measure the amount of I/Os for each group of processes. It allows you to set throttle limits for each of the groups. 
+
+cpu - allows you to monitor CPU usage by a group of processes enabling you to set weights and keep track of usage per CPU
+
+cpuacct - generates automatic reports on CPU resources used by tasks in a cgroup.
+
+cpuset - allows you to pin groups of processes to one CPU or to groups of a process
+
+devices - allows or denies access to devices by tasks in a cgroup
+
+freezer - suspends or resumes tasks in a cgroup. The sigstop signal is sent to the whole container.
+
+memory - sets limits on memory use by tasks in a cgroup and generates automatic reports on memory resources. 
+
+net_cls - tags network packets with a classid that allows the identification of packets originating from a particular cgroup task. (cls - class) (think of QoS)
+
+net_prio - provides a way to set the priority of network traffic dynamically. 
+
+
+
+There are six Linux namespaces. What are namespaces? It limits the ability of a process to be able to see a system resource. A Cgroup limits the ability of a process to be able to access a system resource. 
+
+User namespace - isolates security related identifiers such as user IDs and group IDs. So think in terms of UIDs and GUIDs. It has it's only isolated set of them. 
+
+Inter-Process Communication namespace - isolates system resources from a process, while giving processes created in an IPC namespace visibility to each other allowing for interprocess communication. It still allows containers to be able to communicate.
+
+Unix Timesharing (UTS) namespace - allows a single system to appear to have a different host and domain names to different processes. 
+
+Mount namespace - controls the mountpoints that are visible to each container
+
+PID namespace - provides processes with an independent set of process IDs (PIDs). 
+
+Network namespace - virtualizes the network stack. Each container can have its own network. 
+
+Big idea: A namespace doesn’t create a full “virtualized kernel,” but it divides the host kernel’s functionality into isolated slices such as the above namespaces. So each container gets it's own set of the above kernel resources. 
 
 LXC - Linux Containers. 
