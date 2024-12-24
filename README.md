@@ -8,6 +8,8 @@
 
 * Docker Quick Start
 
+Make sure you add the Docker users to the Docker group if you'll be having people outside of the root user running Docker commands. You can make it one of their secondary groups. Just use `usermod` and make sure you use the -a option to append the new Group to the user instead of completely erasing the user's secondary group (or primary group). 
+
 
 
 ## 12.24.2024
@@ -67,9 +69,11 @@ Use `docker image pull <image name>:<image version>` to grab an image from the D
 
 
 Lab 1 - Installing Docker
+
 We're going to do exactly as the title of the lab. Lets install the necessary package dependencies and then download the Docker repo that we want (make sure it's in /etc/yum.repos.d). Then we'll install it and run the hello-world container for proof. 
 
 Lab 2 - Working with Docker Images
+
 We just used `docker image pull` for a few different services. Very straightforward lab. 
 
 _______________
