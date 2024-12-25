@@ -2,6 +2,36 @@
 
 **Greetings! Now that I'm finally wrapping up my Linux essentials studies, I'll be moving over to Docker for a while. Realistically, I'll be studying Python in January but I'll be doing Docker here and there to get the hang of it. It's interests me more than Python but less than Terraform. I think I need to start here first though. So once again, I'll be publicly documenting my notes. I hear Cloud and DevOps jobs rely heavily on Docker so we need to learn this too! I won't be taking any certifications for this as of yet.**
 
+## 12.26.2024
+
+**Today's Topics**
+
+* Learn Docker by Doing
+
+Okay so this entire course is labs and I was told the prereqs were to do Docker Deep Dive amongst other courses I'm unfamiliar with. I was only going to do this and Docker Certified Associate (DCA). Now, all of these labs have solutions so I think I'll still do it just to get Docker commands under my fingers and be aware of certain concepts. But if the labs get too difficult, I'm going to jump ship and only do DCA. Just an FYI.
+
+Lab 1 - Initializing the Docker Environment
+
+Basically all we did was installed Docker and all of its package dependencies. We also added the cloud_user to the Docker group. Simple. 
+
+Lab 2 - Working with Prebuilt Docker Images
+
+Taking random notes. Lets break down this command: `docker run --name httpd -p 8080:80 -d httpd:2.4`. The `docker run` portion just sas run this container. So it will start up the container. The `--name httpd` portion gives this container a custom name. If you didn't include this, The Moby Project would give the container a name. The `-p 8080:80` portion tells everyone to map port 8080 of the local host (the left side is always the local host) to the port 80 of the container (right side is always the container). The `-`d part says run in detached mode so the container is running in the background and you aren't seeing all the log messages. Just frees up the terminal. The `httpd:2.4` portion just says the image and version you want to run. So it's basically the object. 
+
+Now, everything was pretty straightforward but I don't understand why we ran a copy of these websites in HTTPD and NGINX. That was confusing to me. 
+
+Detour,
+curl (short for Client URL) is a command-line tool used to send HTTP/HTTPS requests and interact with web servers or APIs. It's very versatile and supports various protocols like HTTP, HTTPS, FTP, and more.
+
+Lab 3 - Handcrafting a Container Image
+
+This one was definitely harder to follow. We created our imaages and containers but we went into the containers and pulled down custom website code for each one. Not sure why we removed certain directories but we eventually ran all three containers and curled to each on there respective TCP port. 
+
+Lab 4 - 
+
+
+
+
 ## 12.25.2024
 
 **Today's Topics**
@@ -10,6 +40,27 @@
 
 Make sure you add the Docker users to the Docker group if you'll be having people outside of the root user running Docker commands. You can make it one of their secondary groups. Just use `usermod` and make sure you use the -a option to append the new Group to the user instead of completely erasing the user's secondary group (or primary group). 
 
+Remember, you have to enable and then start Docker. Then you may have to log out and log back into your server. 
+
+The Docker Hub has a registry where you can host your containers in their repository (whether private or public). 
+
+It seems like you can either do `docker image pull` or `docker pull`. I wonder if there is a difference. Chat GPT said `docker image pull` is more explicit and that `docker pull` is pretty much shorthand for `docker image pull`. Docker tags are to give you some additional information on the image or container such as the version. The Image ID is the unique identifier for that container or imaage. 
+
+Let's breakdown the different components of the Dockerfile. You can call the file whatever. But the first section is FROM. Foe example, RUN ubunt:16.04. This will determine your OS image and and version. Then under that, you can tell the Dockerfile to run commands. So do RUN apt-get update for example. RUN apt-get install -y python3 for another example. This will create a container running on Ubunte 16:04 that will update it's packages and install Python3. Try to use the -y option because those additional CLI prompts can break your container deployment. You can also give your Dockerfile a LABEL which is bsically a description. 
+
+Afterwards, use `docker build .` which will build up that dockerfile you created. The "." just says build it from the current directory. You can probably specifiy a path here I would assume. The basics were cool. I'm sure it gets much more complicated. 
+
+To run the container, use `docker container run --name <name of the container> <Image ID>'. I think you would put the Image ID just in case your container doesn't have a name but I think including the name will give it a name. You actually don't have to use the entire Image ID number. Just enough to distinguish the container from the other containers. 
+
+For container management, use `docker images` and `docker container ls`. You can also use `docker ps -a` to see which your containers started or stopped. 
+
+The difference between `docker container run` and `docker container start` is run will create the new container and start it even if the container doesn't exist. Start will start a stopped container that already exists. 
+
+You can do `docker container rm <container name>` to remove a container. 
+
+You can log into your Docker account via the Linux CLI using `docker login`. After you're logged in, you can give your local containers tags and push the container to your online repo using `docker push <container name>:<version>`. You can retrieve it from your online repo using `docker pull <same info>`. 
+
+Not sure the entire point of Docker volumes. Now obviously, your containers may use up storage and create artifacts that need to be collected. I'm going to ask Chat GPT though. 
 
 
 ## 12.24.2024
