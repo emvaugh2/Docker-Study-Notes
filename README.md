@@ -17,10 +17,10 @@ So the bridge, host, and none networks come by default on all Docker environment
 
 You can use 
 
-docker network create \
---driver bridge \
---subnet=192.168.1.0/24 \
-my_custom_network
+`docker network create 
+--driver bridge 
+--subnet=192.168.1.0/24 
+my_custom_network`
 
 to create your own network. This is the basics. You can do more. 
 
