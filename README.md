@@ -9,7 +9,25 @@
 
 * Learn Docker by Doing
 
-Lab 8 - 
+Lab 9 - Docker Container Networking
+
+Okay we went over Docker networking! So that was pretty cool. I know at the start of the lab, we had 3 networks: bridge, host, and none. I'm not sure if this is just a general thing or something A Cloud Guru did. We saw the networks using `docker network ls` and we created our own network using `docker network create <network name>`. You can assign a container a network by using the `--network <network name>` option when doing `docker run`. We didn't go into breaking up the CIDRs but this was pretty useful. 
+
+So the bridge, host, and none networks come by default on all Docker environments. The bridge network is the default network that all containers are placed in. This allows the containers to talk to each other and each other only. The host network is the network of the host machine running all the containers. If you want a container to not be isolated from the host, you can place it in this network. The none network is for total isolation for a container. The container only has a loopback address. No network connectivity. 
+
+You can use 
+
+docker network create \
+--driver bridge \
+--subnet=192.168.1.0/24 \
+my_custom_network
+
+to create your own network. This is the basics. You can do more. 
+
+
+Lab 8 - Building Container Images Using Dockerfiles
+
+We created a Docker file from scratch. It installed HTTPD and ran a bunch of apt updates and things. We made 3 versions of this container image. So if you only do `docker build -t widgetfactory:0.2 .`, Docker will build name your docker image and give it a tag but it will only look for a file name Dockerfile specified in the current directory (hence the dot at the end). You can direct Docker to a different file in a different directory if you want. Keep that in mind. For example, `docker build -t my-image -f MyDockerfile .` will build an image named `my-image` using the Dockerfile `MyDockerFile` in the current directory. 
 
 ## 12.27.2024
 
