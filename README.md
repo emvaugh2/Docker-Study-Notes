@@ -8,8 +8,24 @@
 
 * Learn Docker by Doing
 
+Lab 7 - Storing Container Data in Azure Blob Storage
+
+We did the same exact thing using Azure. This time, we already had a storage account created. We then got the storage account name and keys exported into our Linux environment. We then downloaed `blobfuse` (Azure Blob Storage FUSE) in order to mount our storage account. The rest of the process was the same. 
+
+
+Lab 6 - Storing Container Data in Google Cloud Storage
+
+We pretty much did the same thing with GCP. So we needed to export the Google project number and store in our BUCKET variable. We use `gsutils` (Google Storage Utility) to interact with our Google Cloud Storage service. We also us `gcsfuse` (Google Cloud Storage FUSE) to mount our storage bucket. So we went through that entire process. I've never used GCP before so this was new. But it was nice going through the process again to see which parts were native to AWS and which were native to GCP. 
+
+
+Lab 5 - Storing Container Data in AWS S3
+
+Very nice. So I'm very unfamiliar with AWS although I know that S3 this is your storage solution. We pretty muched logged into the AWS CLI via the Bash CLI. We created a mount point for the S3 bucket and mounted it using s3fs (which stands for S3 File System). This allows you to interact with your S3 bucket like it was a regular part of your local filesystem. We then ran an HTTPD container and wrote some files to it while it displayed a static webpage. The file systems were automatically added to the S3 directory. Pretty cool. Well, convenient. 
+
+
 Lab 4 - Storing Container Data in Docker Volumes
 
+Some containers will have a storage volume created for them. Containers like NGINX wont but containers for Postgres will. Docker will automatically assign these volumes a volume name and it will be located on the hosting system under `/var/lib/docker/volumes/`. You can view these volumes using `docker volume ls`. You can also give your volume a name using `docker volume create <volume name>`. If you use the `--rm` command when running a container, your volume will be deleted once you stop running the container. You can use `docker volume prune` to clean up the unused volumes. We also went over how to backup different volumes but I'll have to revisit this. 
 
 
 
