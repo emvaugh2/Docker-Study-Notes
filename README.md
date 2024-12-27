@@ -9,6 +9,11 @@
 
 * Learn Docker by Doing
 
+Lab 10 - Dockerize a Flask Application
+
+
+
+
 Lab 9 - Docker Container Networking
 
 Okay we went over Docker networking! So that was pretty cool. I know at the start of the lab, we had 3 networks: bridge, host, and none. I'm not sure if this is just a general thing or something A Cloud Guru did. We saw the networks using `docker network ls` and we created our own network using `docker network create <network name>`. You can assign a container a network by using the `--network <network name>` option when doing `docker run`. We didn't go into breaking up the CIDRs but this was pretty useful. 
