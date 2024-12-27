@@ -9,6 +9,10 @@
 
 * Learn Docker by Doing
 
+Lab 11 - Building Smaller Images with Multi-Stage Builds
+
+We added a "build" stage to our container in the previous lab. We decided to build this container in stages which resulted in a slightly smaller image size and a reduced number of layers. I'll have to ask Chat GPT what this is needed for. 
+
 Lab 10 - Dockerize a Flask Application
 
 
