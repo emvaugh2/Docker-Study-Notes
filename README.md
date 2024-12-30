@@ -2,6 +2,36 @@
 
 **Greetings! Now that I'm finally wrapping up my Linux essentials studies, I'll be moving over to Docker for a while. Realistically, I'll be studying Python in January but I'll be doing Docker here and there to get the hang of it. It's interests me more than Python but less than Terraform. I think I need to start here first though. So once again, I'll be publicly documenting my notes. I hear Cloud and DevOps jobs rely heavily on Docker so we need to learn this too! I won't be taking any certifications for this as of yet.**
 
+## 12.30.2024
+
+**Today's Topics**
+
+* Learn Docker by Doing
+
+Lab 14 - Adding Labels and Metadata
+
+Once again, I don't have a Docker Hub account (might just make one) but overall, we just wanted to add labels and metadata to our containers such as Build Version, Date, and Application name. If we're using Watchtower, the version and date are definitely going to change. This allows for that process to be automatic. 
+
+So apparently arguments (ARG) can be defined during the build process of the container. You actually give the container these values when you do `docker build`. They are only used for the build process and are not stored afterwards. 
+
+In order to store them, you can assign the container LABELS containing the ARG information. LABELS add the metadata. Now there's a specific format the LABELS need to be in. I'll have to see where they got this from. But the LABELS can be viewed later
+
+Also I will say when creating the Dockerfile, I was able to create most of it by myself outside of the ARG and LABELS. 
+
+More notes. So the LABEL format for the lab was `org.label-schema.build-date`. I asked Chat GPT is this arbitrary and they said yes but most people use this format so it's universally accepted. So you do not have to use the above format. You just should. `org.label-schema.*` is really the base format. 
+
+Also, the ARGs were specified in the Dockerfile but were not given a default value. So instead of BUILD_VERSION=v1.1, it was just left blank. Then, the LABEL for that argument was just assigned the variable value of whatever the user puts in for that ARG. This is why this is important. If you specify an ARG in the Dockerfile that was not given a default value (like v1.1), then you HAVE to specify a value during the `docker build` command. If you don't, the build will fail. So in a way the build is forcing you to specify this metadata information or you can't build the image. That's pretty smart. So it feels like double work but it's just making sure Docker pros don't skip over documentation steps. 
+
+
+Lab 13 - Updating Containers with Watchtower
+
+"Watchtower is a container that updates all running containers when changes are made to the image that it is running." I've never heard of this. It also checks for changes every 30 seconds. 
+
+We basically created an image, pushed it to Docker Hub, created the Watchtower image and tested it out. Then Watchtower pushed the new image to Docker Hub. Pretty cool. Now, I don't have a Docker Hub account so I didn't finish this entire lab but what I did do was go over all the FROM, RUN, ADD, WORKDIR, and CMD commands to make sure I knew exactly what they did. That was helpful. 
+
+FROM tells you the base image your container will run on. RUN specifies commands to enter WHILE the container is in the build stage. ADD is basically like COPY where you can copy files from your host machine to your container directory tree but apparently ADD can also fetch from URLS and work with tar files. WORKDIR specifies the main directory for your container so you don't have to keep putting the file path. CMD specifies a command to run when the container starts up which is not the same as when it's in the building stage. 
+
+I know there are more but this is a start. 
 
 ## 12.29.2024
 
@@ -10,14 +40,16 @@
 * Learn Docker by Doing
 
 
+Lab 12 - Container Logging
+
+I didn't write my notes for this lab right after I did it so I forget a little bit of what we had to do. I remember us manually configuring where we send the logs for our Docker tasks. Log files are automatically created for each container when they are spun up. They are formatted in JSON and stored in `/var/lib/docker/containers/<container_id>/<container_id>-json.log`. Docker has a logging driver that does this but you can specify a different logging mechanism such as syslog to redirect these log messages. 
+
+
 ## 12.28.2024
 
 **Today's Topics**
 
 * Learn Docker by Doing
-
-Lab 12 - Container Logging
-
 
 
 Lab 11 - Building Smaller Images with Multi-Stage Builds
