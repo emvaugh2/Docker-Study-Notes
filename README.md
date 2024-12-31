@@ -2,6 +2,15 @@
 
 **Greetings! Now that I'm finally wrapping up my Linux essentials studies, I'll be moving over to Docker for a while. Realistically, I'll be studying Python in January but I'll be doing Docker here and there to get the hang of it. It's interests me more than Python but less than Terraform. I think I need to start here first though. So once again, I'll be publicly documenting my notes. I hear Cloud and DevOps jobs rely heavily on Docker so we need to learn this too! I won't be taking any certifications for this as of yet.**
 
+## 12.31.2024
+
+**Today's Topics**
+
+* Docker Certified Associate
+
+So we're going to skip the Docker Swarm and Kubernetes section of learn Docker by doing. I'm looking for a cloud role and I think those put me more into DevOps territory which I would like to learn. I just don't think it's mission critical for my success right now. That's beind said, we're going to move onto the Docker Certified Associate course and make our way through that. Then I'll be done with Docker. 
+
+
 ## 12.30.2024
 
 **Today's Topics**
