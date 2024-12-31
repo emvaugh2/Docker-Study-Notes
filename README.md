@@ -6,9 +6,9 @@
 
 **Today's Topics**
 
-* Docker Certified Associate
+* Docker - Deep Dive
 
-So we're going to skip the Docker Swarm and Kubernetes section of learn Docker by doing. I'm looking for a cloud role and I think those put me more into DevOps territory which I would like to learn. I just don't think it's mission critical for my success right now. That's beind said, we're going to move onto the Docker Certified Associate course and make our way through that. Then I'll be done with Docker. 
+So we're going to skip the Docker Swarm and Kubernetes section of learn Docker by doing. I'm looking for a cloud role and I think those put me more into DevOps territory which I would like to learn. I just don't think it's mission critical for my success right now. That's being said, we're going to move onto the Docker - Deep Dive course and make our way through that. Then I'll be done with Docker. 
 
 
 ## 12.30.2024
