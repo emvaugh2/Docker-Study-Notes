@@ -8,6 +8,19 @@
 
 * Learn Docker by Doing
 
+Lab 16 - Build Services with Docker Compose
+
+
+
+
+Lab 15 - Load Balancing Containers
+
+So we actually used Docker Compose and Swarm to create multiple containers and a load balancer all in one go. The Docker Compose file was in YAML. We also had to configured the nginx.conf file for all of the port connections and such. I'm not very familiar with this file. I'll be honest. Oh I forget, we also specified the network each of the 4 containers (3 web-app containers and an NGINX LB container) would spawn on. We then used `docker-compose up --build -d` to build all the containers. 
+
+We then used Docker Swarm to load balance between these containers. We had to make a docker swarm join token that we pasted onto the workstation server. That became a part of the swarm. The original server was the manager. After that, we ran a `docker service create` command on the manager node and inputted `--replicas=2` in order to make two instances of this nginx-app. 
+
+I actually messed up the final command because I missed the "x" on the "nginx" word at the end of the command. This actually still created the service but it didn't work. Then I couldn't rerun the command. I had to do `docker service ls` to see which service was running and then `docker service rm nginx-app` to remove it. Then I reran the command and it worked. 
+
 Lab 14 - Adding Labels and Metadata
 
 Once again, I don't have a Docker Hub account (might just make one) but overall, we just wanted to add labels and metadata to our containers such as Build Version, Date, and Application name. If we're using Watchtower, the version and date are definitely going to change. This allows for that process to be automatic. 
