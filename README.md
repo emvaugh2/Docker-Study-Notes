@@ -8,6 +8,11 @@
 
 * Learn Docker by Doing
 
+Lab 18 - Using Grafana with Prometheus for Alerting and Monitoring
+
+Okay so this lab was actually pretty cool. We made a bunch of containers including Prometheus and Grafana using Docker Compose. We then access Grafana using port 3000 on the server PIP. We put in our username and password and then added our new Grafana data source named Prometheus which we ended up specifying using our private IP and Prometheus container port number (9090). We then imported our Docker dashboard to Grafana. We had a long JSON file (not sure where this came from) and once we added it, all of our container metrics popped up in the Dashboard! That was super cool. Definitely makes monitoring easier and more graphical. I need to find out what all was in this JSON file. 
+
+
 Lab 17 - Monitoring Containers with Prometheus
 
 How cool. We finally got to Prometheus. We first created a Docker Compose file that spun up cAdvisor and a Prometheus container. I didn't know Prometheus was a container. But we mapped both Pro and cAdvisor to ports 9090 and 8080, respectively. We also made the Prometheus container dependent on the cAdvisor container (I have no clue what cAdvisor does). Once we ran `docker-compose up -d`, we were able to go to the server PIP on each port to run metrics in Pro and cAdvisor which was really nice. 
