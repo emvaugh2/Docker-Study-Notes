@@ -8,9 +8,20 @@
 
 * Learn Docker by Doing
 
+Lab 17 - Monitoring Containers with Prometheus
+
+How cool. We finally got to Prometheus. We first created a Docker Compose file that spun up cAdvisor and a Prometheus container. I didn't know Prometheus was a container. But we mapped both Pro and cAdvisor to ports 9090 and 8080, respectively. We also made the Prometheus container dependent on the cAdvisor container (I have no clue what cAdvisor does). Once we ran `docker-compose up -d`, we were able to go to the server PIP on each port to run metrics in Pro and cAdvisor which was really nice. 
+
+
 Lab 16 - Build Services with Docker Compose
 
+We are building a blogging container using Ghost. Ghost is similar to Word Press. We input some information into the docker-compose.yml file. We had to specify the Docker Compose version which we chose 3. It's the standard format for Docker Compose. We then specified the Ghost and MySQL containers we're going to create. 
 
+Both containers contained the `restart: always` info which says always restart this container when this service stops. We also had port mapping on the Ghost container. We also created persistent volumes for both containers and we specified the file location on the host machine. The Ghost section also has the `depends_on: - mysql` info which says only start the Ghost container after the MySQL container starts. 
+
+The Ghost container section has `database__*` arguments that are the specific format that Ghost requires from a database in order to draw information from that database. This is very specific to Ghost. 
+
+That's pretty much the entire lab. 
 
 
 Lab 15 - Load Balancing Containers
