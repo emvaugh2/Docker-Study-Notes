@@ -18,6 +18,8 @@ Docker checks the local system for a container image and if it doesnt find it th
 
 Docker client talks to the Docker engine. The Docker client is the CLI that interacts with the Docker daemon. This is basically just the Bash CLI commands you get when you install Docker. So while you're in Bash and you use `docker build`, the docker build part is the Docker client. It's the tool on the host machine. Here's the entire process of creating a container:
 
+![Image](DockerEngineProcess.PNG)
+
 Use the CLI to execute a command
 Docker client uses the appropriate API payload
 POSTs to the correct API endpoint
