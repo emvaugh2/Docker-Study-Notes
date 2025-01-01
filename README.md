@@ -8,11 +8,31 @@
 
 * Docker - Deep Dive
 
-Okay so lets do a refresher on `yum` because lately, a lot of tutorials have been downloading a tool's package repo off of a website and then installing it that way. I'm just used to using `yum install` to do this automatically. So, `yum` is a package MANAGER. It can install, remove, clean up, etc all kinds of packages and dependencies. So when you use `yum install <tool>`, it will check it's repos (online or locally) to see if it can find the package and all it's dependencies. It will automatically download the dependencies. Then it will install the package. When you do `yum remove', it will remove the package but not it's dependencies or configuration files. "The yum-config-manager tool is part of the yum-utils package and is used to manage repository configurations on your system." So I had Chat GPT explain me to why we need to add the Docker repo using the yum-config-manager. First, lets talk about `yum-config-manager`. How is this different from `yum` and why do we need it? Also, why is it packaged with `yum-utils` and why do we need to download this? So `yum` allows us to automatically install, remove, list, and search for packages. It can only search the repos managed by it's distro (so lets say RHEL or CentOS for example). If there are packages not managed by the distro, `yum` will not be able to find it online or locally. So Docker is a third party software. It's not managed by any Linux distro. So `yum` wouldn't be able to find it nor does `yum` allow you to add repos from third-party software sites. `yum-config-manager` does, however, allow you to add repots and much more. 
+Okay so lets do a refresher on `yum` because lately, a lot of tutorials have been downloading a tool's package repo off of a website and then installing it that way. I'm just used to using `yum install` to do this automatically. So, `yum` is a package MANAGER. It can install, remove, clean up, etc all kinds of packages and dependencies. So when you use `yum install <tool>`, it will check it's repos (online or locally) to see if it can find the package and all it's dependencies. It will automatically download the dependencies. Then it will install the package. When you do `yum remove`, it will remove the package but not it's dependencies or configuration files. "The yum-config-manager tool is part of the yum-utils package and is used to manage repository configurations on your system." So I had Chat GPT explain me to why we need to add the Docker repo using the yum-config-manager. First, lets talk about `yum-config-manager`. How is this different from `yum` and why do we need it? Also, why is it packaged with `yum-utils` and why do we need to download this? So `yum` allows us to automatically install, remove, list, and search for packages. It can only search the repos managed by it's distro (so lets say RHEL or CentOS for example). If there are packages not managed by the distro, `yum` will not be able to find it online or locally. So Docker is a third party software. It's not managed by any Linux distro. So `yum` wouldn't be able to find it nor does `yum` allow you to add repos from third-party software sites. `yum-config-manager` does, however, allow you to add repots and much more. 
 
 Why doesn't Docker just put it's repo on the Linux distros? Well, Docker is third-party owned and is in charge of keeping their repos up to date. So it's easier to make things smoother if they just managed their repos. Well why doesn't `yum-config-manager` automatically come with the Linux distro? Well remember. We try to keep Linux distros lightweight so they consume less resources. You may not need `yum-config-manager` for your system so we package it separately. `yum-config-manager` is packaged with the `yum-utils` package. Once you install that, you can use `yum-config-manager` to add repos, disable repos, and view repo configs. It automatically creates the `yum.repos.d` file for your repos as well. Hopefully that clears all of that up. 
 
 First, uninstall the old versions of Docker (I'm sure there are a list of Docker package apps that you can copy and paste but for example, you have docker-client, docker-client-latest, docker-common, docker-latest, docker-latest-logrotate, docker-logrotate, docker-engine). Then, you need to install yum-utils, device-mapper-persistent-data, and lvm2. Apparently this is still a thing so here: `sudo yum install -y yum-utils device-mapper-persistent-data lvm2`. After you install your Docker repo, enable it and start it using `systemctl`. Then add your user to the Docker group.
+
+Docker checks the local system for a container image and if it doesnt find it there, it will look at the Docker registry online. Docker image - read-only template with instructions for creating a Docker container. Container - runnable instance of an image. Containers can be attached to more than one network. Docker services - scales containers across multiple Docker daemons (hosts). 
+
+Docker client talks to the Docker engine. The Docker client is the CLI that interacts with the Docker daemon. This is basically just the Bash CLI commands you get when you install Docker. So while you're in Bash and you use `docker build`, the docker build part is the Docker client. It's the tool on the host machine. Here's the entire process of creating a container:
+
+Use the CLI to execute a command
+Docker client uses the appropriate API payload
+POSTs to the correct API endpoint
+The Docker daemon receives instructions
+The Docker daemon calls containerd to start a new container
+The Docker daemon uses gRPC (a CRUD style API)
+containerd creates an OCI bundle from the Docker image
+Tells runc to create a container using the OCI bundle. 
+runc interfaces with the OS kernel to get the constructs needed to create a container
+This includes namespaces, cgroups, etc
+The container process is started as a child process
+Once the container starts, runc will exit
+The container is up and running. 
+
+
 
 
 
