@@ -12,6 +12,8 @@ Okay so lets do a refresher on `yum` because lately, a lot of tutorials have bee
 
 Why doesn't Docker just put it's repo on the Linux distros? Well, Docker is third-party owned and is in charge of keeping their repos up to date. So it's easier to make things smoother if they just managed their repos. Well why doesn't `yum-config-manager` automatically come with the Linux distro? Well remember. We try to keep Linux distros lightweight so they consume less resources. You may not need `yum-config-manager` for your system so we package it separately. `yum-config-manager` is packaged with the `yum-utils` package. Once you install that, you can use `yum-config-manager` to add repos, disable repos, and view repo configs. It automatically creates the `yum.repos.d` file for your repos as well. Hopefully that clears all of that up. 
 
+___________________
+
 First, uninstall the old versions of Docker (I'm sure there are a list of Docker package apps that you can copy and paste but for example, you have docker-client, docker-client-latest, docker-common, docker-latest, docker-latest-logrotate, docker-logrotate, docker-engine). Then, you need to install yum-utils, device-mapper-persistent-data, and lvm2. Apparently this is still a thing so here: `sudo yum install -y yum-utils device-mapper-persistent-data lvm2`. After you install your Docker repo, enable it and start it using `systemctl`. Then add your user to the Docker group.
 
 Docker checks the local system for a container image and if it doesnt find it there, it will look at the Docker registry online. Docker image - read-only template with instructions for creating a Docker container. Container - runnable instance of an image. Containers can be attached to more than one network. Docker services - scales containers across multiple Docker daemons (hosts). 
@@ -34,8 +36,15 @@ The container process is started as a child process
 Once the container starts, runc will exit
 The container is up and running. 
 
+___________________
 
+Docker storage location on Linux: /var/lib/docker/<Storage-Driver>/. You need to create the volume first and then create the container. Then, mount the volume inside of the container. Deleting a container does not delete the volume. Use the `docker volume -h` to see all the sub commands for creating volumes. The usual suspects are ls, create, inspect, rm, and prune. 
 
+Seems like we don't need to worry about bind mounts. Lets break this next part down: `-v <VOLUME-NAME>:<TARGET> <IMAGE> `. This is how you mount persistent storage for a container. You use the `-v` flag for volume. The <VOLUME-NAME> is the name of the volume you created using `docker volume`. The <TARGET> is the directory you created ON THE CONTAINER that the container writes to but the data actually goes to the same volume on the HOST. Think of the container directory as more of a shortcut. So the directory is on the container but it goes to the host's directory. The <IMAGE> is just the image you running for the container. 
+
+___________________
+
+Lets talk about the Dockerfile. It's the instructions on how to build an image. You use the `docker image build` command. Every Dockerfile starts with a FROM layer. This creates the base image. COPY adds files from the Docker client's current directory (so whatever the host machine's current directory is). RUN builds your application with make. CMD specifies what command to run within the container. The `.dockerignore` file, you include a copy of the list of files and directories you want excluded and they won't get copied over. 
 
 
 
