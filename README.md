@@ -8,6 +8,14 @@
 
 * Docker - Deep Dive
 
+We can save and load images into a tar file as well. Use `docker image save` and `docker image load` as well. 
+
+You can do `docker container top` to see the processes running in your container. 
+
+Use the `--restart` flag to set the policy when the container stops. You have no (don't automatically restart), on-failure (only restart if the container exits do to an error), always (always restart no matter what), and unless-stopped (always restart unless the container was manually stopped). 
+
+The instructor is showing me portainer.io and Watchtower. I did a few labs with Watchtower. Apparently, portainer.io is a GUI version of managing containers. Nice. 
+
 
 ## 01.02.2025
 
