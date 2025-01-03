@@ -2,11 +2,28 @@
 
 **Greetings! Now that I'm finally wrapping up my Linux essentials studies, I'll be moving over to Docker for a while. Realistically, I'll be studying Python in January but I'll be doing Docker here and there to get the hang of it. It's interests me more than Python but less than Terraform. I think I need to start here first though. So once again, I'll be publicly documenting my notes. I hear Cloud and DevOps jobs rely heavily on Docker so we need to learn this too! I won't be taking any certifications for this as of yet.**
 
+## 01.03.2025
+
+**Today's Topics**
+
+* Docker - Deep Dive
+
+
 ## 01.02.2025
 
 **Today's Topics**
 
 * Docker - Deep Dive
+
+I had to review environment variables for both Linux and Docker. Environment variables can be persistent and used globally in any shell for that server CLI. Familiar env vars are $PATH and $HOME. You can define your own env vars though. We do this in our Dockerfile so we can create our own env vars in our container runtime. You can have these predefined in the Dockerfile or just set them in the file so you'll be forced to pass a value to them in the `docker build --env` command. Just set them as default for good practice. 
+
+You can also have a volume created for you in the `docker build` process by using the `VOLUME` layer in the Dockerfile. I wonder why people don't just do this instead. 
+
+ENTRYPOINT and CMD do the same thing but there are a few differences. I'll have to go back over what they are. Not really seeing the application point of it even with Chat GPT. 
+
+Lets talk about the `.dockerignore` file. I was wondering why you would need this because I'm like, just don't include the files that you don't want copied over. But say you pull a repo of files for your container from Git. Your GitHub repo might have additional necessary files like a README.md and etc that are useful for documentation but obviously you don't need this when building your container. Say you're pulling repos from GitHub all the time and using them for your container. This will be a lot of manually excluding the files you don't want. So you can compile a `.dockerignore` file to automatically block out those files when creating a container. 
+
+You can build images/containers directly from a tar file. Just a heads up. 
 
 
 ## 01.01.2025
