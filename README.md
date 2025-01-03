@@ -8,6 +8,27 @@
 
 * Docker - Deep Dive
 
+Lab 4 - Tagging and Pushing Images to DockerHub
+
+I don't have a Docker Hub account but this lab was exactly what it says in the title. Pretty easy. 
+
+Lab 3 - Creating Images Using a Dockerfile
+
+So we built a multi-stage container here which I still don't completely understand the purpose of this (yes, make the image smaller and use and/or discard artifacts) but I went ahead and tried to make one to the best of my ability. They gave us the instructions as to what to put in the Dockerfile but not the actualy commands layers. So I went and did that on my own. I actually got about 80% of it right but I've also seen this multi-stage file before. I missed a few formatting things like the quotation marks around the ENV VAR value and I forgot to put a label on it. There were two other things but I think I overall get the gist of how these are configured. 
+
+Lab 2 - Docker Volumes
+
+This lab was also pretty straightforward. We had to create a Docker volume and mount it during the docker container run process. I've never done the mount version. Only the persistent storage version of the volume. But that was pretty much the entire lab. I'll inspect the mount after the container starts. 
+
+
+Lab 1 - Docker Networking
+
+We created a MySQL database that needs to communicate with an NGINX server so we made containers for both. We want the MySQL container to be on the localhost network and the NGINX container to be on both the frontend network and the localhost networks. So we used `docker network create <network name>` to create the localhost and frontend bridge networks. We assigned both containers to these networks using the `docker run --network` command and flags. Since we didn't have these container images on our local host, Docker went and fetched the images from Docker Hub. Eventually, we used the `docker network connect localhost frontend-app` command to attach the NGINX container to both networks. We did `docker inspect` to check the network configs for the NGINX container. Both networks and IPs were listed here. 
+
+Pretty straightforward lab. 
+
+_________________
+
 We can save and load images into a tar file as well. Use `docker image save` and `docker image load` as well. 
 
 You can do `docker container top` to see the processes running in your container. 
